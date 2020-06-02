@@ -1,14 +1,16 @@
-package com.mercadolibre.mutants_exam.service;
+package com.mercadolibre.mutants_exam.service.detector;
 
 import com.mercadolibre.mutants_exam.dto.DNASequence;
 import com.mercadolibre.mutants_exam.exception.BadDNASequenceException;
 import javafx.util.Pair;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+@Service("mutant_detector_service_delegate")
 public class MutantDetectorService implements IMutantDetectorService {
 
     public Boolean isMutant(DNASequence dnaSequence) throws BadDNASequenceException {
