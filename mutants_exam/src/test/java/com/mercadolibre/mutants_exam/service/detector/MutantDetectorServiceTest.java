@@ -1,7 +1,8 @@
-package com.mercadolibre.mutants_exam.service;
+package com.mercadolibre.mutants_exam.service.detector;
 
 import com.mercadolibre.mutants_exam.dto.DNASequence;
 import com.mercadolibre.mutants_exam.exception.BadDNASequenceException;
+import com.mercadolibre.mutants_exam.service.detector.MutantDetectorService;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
