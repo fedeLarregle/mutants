@@ -1,6 +1,7 @@
 package com.mercadolibre.mutants_exam.service;
 
 import com.mercadolibre.mutants_exam.dto.DNASequence;
+import com.mercadolibre.mutants_exam.exception.BadDNASequenceException;
 import javafx.util.Pair;
 
 import java.util.HashSet;
@@ -10,14 +11,17 @@ import java.util.Set;
 
 public class MutantDetectorService implements IMutantDetectorService {
 
-    public Boolean isMutant(DNASequence dnaSequence) {
+    public Boolean isMutant(DNASequence dnaSequence) throws BadDNASequenceException {
         final String[] sequences = {"AAAA", "TTTT", "CCCC", "GGGG"};
+        final Set<Character> nitrogenousBases = new HashSet<Character>() {{ add('A'); add('T'); add('C'); add('G');}};
 
         final Set<SequencePosition> sequencePositions = new HashSet<>();
 
         String[] dna = dnaSequence.getDna();
         int sequenceCounter = 0;
         boolean isMutant = false;
+
+        validateDNASequence(dna, nitrogenousBases);
 
         outer:
         for (int i = 0; i < dna.length; i++)
@@ -39,6 +43,16 @@ public class MutantDetectorService implements IMutantDetectorService {
                 }
 
         return isMutant;
+    }
+
+    private void validateDNASequence(String[] dna, Set<Character> nitrogenousBases) throws BadDNASequenceException {
+        for (int i = 0; i < dna.length; i++)
+            for (int j = 0; j < dna[i].length(); j++) {
+                if (dna.length != dna[i].length())
+                    throw new BadDNASequenceException("DNA sequence does not have a square shape.");
+                if (!nitrogenousBases.contains(dna[i].charAt(j)))
+                    throw new BadDNASequenceException("DNA sequence contains non nitrogenous base: " + dna[i].charAt(j));
+            }
     }
 
     // This function searches in all 8-direction from point
