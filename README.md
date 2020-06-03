@@ -50,3 +50,19 @@ curl --location --request POST 'localhost:8080/mutant' \
 ```
 curl --location --request GET 'localhost:8080/stats'
 ```
+
+## Running the application on the cloud (AWS)
+This application is deployed in AWS so you can "test it" without the need to clone it by requesting it as follows:
+
+### curl examples
+
+1. /mutant request with a mutant DNA sequence
+```
+curl --location --request POST 'MercadolibreMutants-env.eba-vp7fk7yp.sa-east-1.elasticbeanstalk.com/mutant' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "dna":["ATGCAA", "CGGATA", "TAATGT", "AAGGGG", "CCCTTA", "TTACTT"]
+}'
+```
+
+Well, you get the idea, same as before but with `MercadolibreMutants-env.eba-vp7fk7yp.sa-east-1.elasticbeanstalk.com/`
