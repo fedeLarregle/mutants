@@ -31,8 +31,14 @@ public class AuditHumanGenderService implements IAuditHumanGenderService {
         // Save the HumanGender
         HumanGender saved = humanGenderRepository.save(humanGender);
         // Audit the increment of the corresponding detection being one more mutant or one more non-mutant
-        Optional<HumanGenderStat> optionalHumanGenderStat = humanGenderStatsRepository.findById(1L);
-        HumanGenderStat humanGenderStat = optionalHumanGenderStat.orElse(new HumanGenderStat(0L, 0L));
+        Iterable<HumanGenderStat> stats = humanGenderStatsRepository.findAll();
+        HumanGenderStat humanGenderStat;
+        if (stats.iterator().hasNext()) {
+            humanGenderStat = stats.iterator().next();
+        } else {
+            humanGenderStat = new HumanGenderStat(0L, 0L);
+        }
+
         if (humanGender.getGender().equals(HumanGender.Gender.MUTANT)) {
             humanGenderStat.setMutantCount(humanGenderStat.getMutantCount() + 1L);
         } else {
