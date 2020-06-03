@@ -66,3 +66,8 @@ curl --location --request POST 'MercadolibreMutants-env.eba-vp7fk7yp.sa-east-1.e
 ```
 
 Well, you get the idea, same as before but with `MercadolibreMutants-env.eba-vp7fk7yp.sa-east-1.elasticbeanstalk.com/`
+
+
+## Further improvements
+The way /stats is counting `count_mutant_dna` and `count_human_dna` is by transactionally incrementing a `BITINT` in `Human_Gender_Stats` table when ever we "detect"/"analize" a new DNA sequence.
+However, this could have been done using Redis `INCR key` command, they even have a pattern for that, so... [INCR key](https://redis.io/commands/incr).
