@@ -75,4 +75,4 @@ However, this could have been done using Redis `INCR key` command, they even hav
 
 2. reads to `Human_Gender_Stats` table could/should be cached but it is not as simple as putting `@Cacheable` as with access to Human_Gender. We should think of a good enoght TTL (Time To Live) for this cache and it should be invalidated/evicted every time we "detect"/"analize" a new DNA sequence. Also this could be avoided by implementing the previous section 1.
 
-3. `spring.jpa.hibernate.ddl-auto=create` property is extrelly bad for production environments, this deletes and re-creates the database on every deployment. A more proper solution is to use a migration tool like [Liquibase](https://www.liquibase.org/) and to let DBAs review the migrations.
+3. `spring.jpa.hibernate.ddl-auto=create` property is extremely bad for production environments, this deletes and re-creates the database on every deployment. A more proper solution is to use a migration tool like [Liquibase](https://www.liquibase.org/) and to let DBAs review the migrations.
