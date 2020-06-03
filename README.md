@@ -8,6 +8,8 @@ For a full description of the requirements see: [click here](https://github.com/
 
 ### Requirements
 Before starting, you'll need to have Java 8 installed and Maven.
+For the local environment I used H2 in-memory database which is very easy to use and good enough for testing porpuses.
+
 1. Clone the repository:
 ```
 $ git clone https://github.com/fedeLarregle/mutants.git
@@ -60,7 +62,7 @@ curl --location --request GET 'localhost:8080/stats'
 ```
 
 ## Running the application on the cloud (AWS)
-This application is deployed in AWS so you can "test it" without the need to clone it by requesting it as follows:
+This application is deployed in AWS using Elastic Beanstalk service configured to use `db.t2.micro` database, so you can "test it" without the need to clone it by requesting it as follows:
 
 ### curl examples
 
