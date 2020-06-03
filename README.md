@@ -46,7 +46,15 @@ curl --location --request POST 'localhost:8080/mutant' \
 	"dna": ["AAAAA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
 }'
 ```
-4. Simple /stats request
+4. /mutant request with FORBIDDEN DNA sequence (non mutant)
+```
+curl --location --request POST 'localhost:8080/mutant' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"dna": ["AAACAG","CAGTGC","TTATGT","AGAAGG","CTCCTA","TCACTG"]
+}'
+```
+5. Simple /stats request
 ```
 curl --location --request GET 'localhost:8080/stats'
 ```
