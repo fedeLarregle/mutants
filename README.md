@@ -70,9 +70,11 @@ Well, you get the idea, same as before but with `MercadolibreMutants-env.eba-vp7
 
 ## Further improvements
 
-1. The way /stats is counting `count_mutant_dna` and `count_human_dna` is by transactionally incrementing a `BITINT` in `Human_Gender_Stats` table when ever we "detect"/"analize" a new DNA sequence.
+1. The application lacks of [Metrics](https://docs.spring.io/spring-metrics/docs/current/public/datadog), this is a very helpfull thing to have in production not only to monitor but also to define SLA with any possible clients.
+
+2. The way /stats is counting `count_mutant_dna` and `count_human_dna` is by transactionally incrementing a `BITINT` in `Human_Gender_Stats` table when ever we "detect"/"analize" a new DNA sequence.
 However, this could have been done using Redis `INCR key` command, they even have a pattern for that, so... [INCR key](https://redis.io/commands/incr).
 
-2. reads to `Human_Gender_Stats` table could/should be cached but it is not as simple as putting `@Cacheable` as with access to Human_Gender. We should think of a good enoght TTL (Time To Live) for this cache and it should be invalidated/evicted every time we "detect"/"analize" a new DNA sequence. Also this could be avoided by implementing the previous section 1.
+3. reads to `Human_Gender_Stats` table could/should be cached but it is not as simple as putting `@Cacheable` as with access to Human_Gender. We should think of a good enough TTL (Time To Live) for this cache and it should be invalidated/evicted every time we "detect"/"analize" a new DNA sequence. Also this could be avoided by implementing the previous section 1.
 
-3. `spring.jpa.hibernate.ddl-auto=create` property is extremely bad for production environments, this deletes and re-creates the database on every deployment. A more proper solution is to use a migration tool like [Liquibase](https://www.liquibase.org/) and to let DBAs review the migrations.
+4. `spring.jpa.hibernate.ddl-auto=create` property is extremely bad for production environments, this deletes and re-creates the database on every deployment. A more proper solution is to use a migration tool like [Liquibase](https://www.liquibase.org/) and to let DBAs review the migrations.
