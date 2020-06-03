@@ -2,7 +2,8 @@ package com.mercadolibre.mutants_exam.service.detector;
 
 import com.mercadolibre.mutants_exam.dto.DNASequence;
 import com.mercadolibre.mutants_exam.exception.BadDNASequenceException;
-import javafx.util.Pair;
+
+import com.mercadolibre.mutants_exam.utils.Pair;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -137,6 +138,9 @@ public class MutantDetectorService implements IMutantDetectorService {
         public int hashCode() {
             return (start.hashCode() * end.hashCode());
         }
+
+
+
     }
 
 }
